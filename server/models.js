@@ -1,5 +1,3 @@
-// mongodb://jnex:<dbpassword>@ds032887.mlab.com:32887/dnews
-
 const models = {
   Admin: require('./models/admins'),
   Category: require('./models/category'),

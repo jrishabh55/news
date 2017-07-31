@@ -10,4 +10,13 @@ const CategorySchema = new Schema({
 
 autoIncrement.initialize(connection);
 CategorySchema.plugin(autoIncrement.plugin, 'Category');
+
+CategorySchema.methods.findById = function (id) {
+  return this.model('Category').find({_id: id});
+};
+
+CategorySchema.methods.findByName = function (name) {
+  return this.model('Category').find({username: name});
+};
+
 module.exports = mongoose.model('Category', CategorySchema);
