@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const autoIncrement = require("mongoose-auto-increment");
 const Schema = mongoose.Schema;
 const connection = require('../connection');
-const passportLocalMongoose = require('passport-local-mongoose');
 
 const UsersSchema = new Schema({
   name: {type: [String], required: true},
@@ -19,19 +18,20 @@ const UsersSchema = new Schema({
 autoIncrement.initialize(connection);
 UsersSchema.plugin(autoIncrement.plugin, 'User');
 
-UsersSchema.methods.findById = function (id) {
-  return this.model('User').find({_id: id});
+const User = module.exports = mongoose.model('User', UsersSchema);
+
+module.exports.findById = function (id, callback) {
+  return User.find({_id: id}, callback);
 };
 
-UsersSchema.methods.findByUsername = function (username) {
-  return this.model('User').find({username: username});
+module.exports.findByUsername = function (username, callback) {
+  return User.find({username: username}, callback);
 };
 
-UsersSchema.methods.findByEmail = function (email) {
-  return this.model('User').find({email: email});
+module.exports.findByEmail = function (email, callback) {
+  return User.find({email: email}, callback);
 };
 
-UsersSchema.plugin(passportLocalMongoose);
-
-
-module.exports = mongoose.model('User', UsersSchema);
+module.exports.comparePass = (provided_password, comparable_password, cb) => {
+  return cb(null, provided_password === comparable_password);
+};

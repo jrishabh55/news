@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
+const db = require('./config/config').db;
+const connection = `mongodb://${db.username}:${db.password}@${db.host}/${db.name}`;
 
-// mongodb://jnex:<dbpassword>@ds032887.mlab.com:32887/dnews
-const db = mongoose.connect('mongodb://jnex:7Q3Ae4POP8nU@ds032887.mlab.com:32887/dnews', {useMongoClient: true});
-module.exports = db;
-
+module.exports = mongoose.connect(connection, {useMongoClient: true});
