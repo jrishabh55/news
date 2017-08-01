@@ -2,9 +2,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">Login</div>
     <div class="panel-body">
-      <div *ngFor="let error of loginError" class="alert alert-danger">
-        {{ error }}
-      </div>
+      <ngx-flash-messages></ngx-flash-messages>
 
       <form class="form" (submit)="loginFormSubmit(form.value)" [formGroup]="form">
         <div class="form-group">

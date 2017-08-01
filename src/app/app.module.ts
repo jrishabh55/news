@@ -1,5 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FlashMessagesModule} from 'ngx-flash-messages';
+import {HttpModule} from '@angular/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -10,7 +13,7 @@ import {HeaderComponent} from './layout/header/header.component';
 import {LoginComponent} from './users/login/login.component';
 import {RegistrationComponent} from './users/registration/registration.component';
 import {AuthGuard} from './auth/auth.guard';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -25,10 +28,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlashMessagesModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

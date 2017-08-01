@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FlashMessagesService} from "ngx-flash-messages";
 
 @Component({
   selector: 'jnex-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginError: Array<String> = [];
 
-  constructor() {
+  constructor(private flash: FlashMessagesService) {
   }
 
   loginFormSubmit(md) {

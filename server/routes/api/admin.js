@@ -11,7 +11,7 @@ router.get('', (request, response) => {
 });
 
 router.post('/register', (request, response) => {
-  let params = request.query;
+  let params = request.body;
 
   if(
       !helpers.exists(params.username) &&
@@ -33,9 +33,11 @@ router.post('/register', (request, response) => {
     'access_level.admin': true
   });
 
-  admin.save();
-
-  response.json(helpers.api_response(admin));
+  if (admin.save()) {
+    response.json(helpers.api_response(admin));
+  } else {
+    response.json(helpers.api_error('Invalid Error', 200));
+  }
 
 });
 

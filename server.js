@@ -15,6 +15,9 @@ require('dotenv').config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+// Cors
+app.use(require('cors')());
+
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -22,13 +25,12 @@ app.use(passport.session());
 require('./server/config/passport')(passport);
 
 //Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist')));
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', api);
 
 app.get('/', (req, response) => {
-  response.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  response.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3001;
