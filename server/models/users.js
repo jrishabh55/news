@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 const connection = require('../connection');
 
 const UsersSchema = new Schema({
-  name: {type: [String], required: true},
-  username: {type: [String], required: true, unique: true, lowercase: true},
-  email: {type: [String], required: true, unique: true, lowercase: true},
+  name: {type: String, required: true},
+  username: {type: String, required: true, unique: true, lowercase: true},
+  email: {type: String, required: true, unique: true, lowercase: true},
   password: {type: String, required: true},
-  activated: {type: [Boolean], default: false},
-  access_token: {type: [String], unique: true},
+  activated: {type: Boolean, default: false},
+  access_token: {type: String, unique: true},
   created_at: {type: Date, default: Date.now()},
-  reference: {type: [String]}
+  reference: {type: String}
 });
 
 

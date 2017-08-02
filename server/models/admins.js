@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 const connection = require('../connection');
 
 const AdminSchema = new Schema({
-  name: {type: [String], required: true, lowercase: true},
-  username: {type: [String], required: true, unique: true, lowercase: true},
+  name: {type: String, required: true, lowercase: true},
+  username: {type: String, required: true, unique: true, lowercase: true},
   password: {type: String, required: true},
-  activated: {type: [Boolean], default: false},
-  email: {type: [String], required: true, unique: true, lowercase: true},
+  activated: {type: Boolean, default: false},
+  email: {type: String, required: true, unique: true, lowercase: true},
   created_at: {type: Date, default: Date.now()},
   access_level: {
-    admin: {type: [Boolean], default: true}
+    admin: {type: Boolean, default: true}
   }
 });
 

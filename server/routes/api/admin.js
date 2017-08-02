@@ -13,12 +13,12 @@ router.get('', (request, response) => {
 router.post('/register', (request, response) => {
   let params = request.body;
 
-  if(
-      !helpers.exists(params.username) &&
-      !helpers.exists(params.password) &&
-      !helpers.exists(params.name) &&
-      !helpers.exists(params.email)
-    ) {
+  if (
+    !helpers.exists(params.username) &&
+    !helpers.exists(params.password) &&
+    !helpers.exists(params.name) &&
+    !helpers.exists(params.email)
+  ) {
     response.send(helpers.api_error('Invalid parameters'));
     response.end();
     return;
@@ -42,12 +42,10 @@ router.post('/register', (request, response) => {
 });
 
 
-
-
 router.post('/login', (request, response) => {
-  let params = request.query;
+  let params = request.body;
 
-  if(!helpers.exists(params.username) && !helpers.exists(params.password)) {
+  if (!helpers.exists(params.username) && !helpers.exists(params.password)) {
     response.send(helpers.api_error('Invalid parameters'));
     response.end();
     return;
@@ -55,16 +53,25 @@ router.post('/login', (request, response) => {
   model.byUsername(params.username, (err, user) => {
     if (err) {
       response.json(helpers.api_error(err, 200));
-    } else if(!user) {
+    } else if (!user) {
       response.json(helpers.api_error('No User'));
-    }else {
+    } else {
       model.comparePass(params.password, user.password, (err, isMatch) => {
-        if(err)
+        if (err)
           throw err;
-        if(isMatch) {
+        if (isMatch) {
           const token = jwt.sign(user, config.secret, {expiresIn: 3600});
-          response.json(helpers.api_response({token: `JWT ${token}`, user: user}));
-        }else {
+
+          const u = {
+            name: user.name,
+            username: user.username,
+            email: user.email,
+            access_level: user.access_level,
+            created_at: user.created_at,
+          };
+
+          response.json(helpers.api_response({token: `JWT ${token}`, user: u}));
+        } else {
           response.json(helpers.api_error('Incorrect Password'));
         }
       });
