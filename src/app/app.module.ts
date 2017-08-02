@@ -6,14 +6,17 @@ import {HttpModule} from '@angular/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {NewsComponent} from './news/news.component';
-import {TopnavComponent} from './navbar/topnav/topnav.component';
-import {FooterComponent} from './layout/footer/footer.component';
-import {HeaderComponent} from './layout/header/header.component';
-import {LoginComponent} from './users/login/login.component';
-import {RegistrationComponent} from './users/registration/registration.component';
-import {AuthGuard} from './auth/auth.guard';
+import {NewsComponent} from './components/news/news.component';
+import {TopnavComponent} from './components/navbar/topnav/topnav.component';
+import {FooterComponent} from './components/layout/footer/footer.component';
+import {HeaderComponent} from './components/layout/header/header.component';
+import {LoginComponent} from './components/users/login/login.component';
+import {RegistrationComponent} from './components/users/registration/registration.component';
+import {AuthGuard} from './guards/auth/auth.guard';
 import {AuthService} from './services/auth.service';
+import {ProfileComponent} from './components/users/profile/profile.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {BreadcrumbComponent} from './components/layout/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import {AuthService} from './services/auth.service';
     FooterComponent,
     HeaderComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent,
+    DashboardComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,

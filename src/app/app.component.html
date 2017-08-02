@@ -1,4 +1,16 @@
 <jnex-topnav></jnex-topnav>
+<header id="header" *ngIf="authService.loggedIn()">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
+          <small>Management Console</small>
+        </h1>
+      </div>
+    </div>
+  </div>
+</header>
+<jnex-breadcrumb></jnex-breadcrumb>
 <div id="container" class="container">
   <router-outlet></router-outlet>
 </div>
